@@ -8,6 +8,7 @@ import Mentorship from './pages/Mentorship';
 import StudentChat from './pages/StudentChat';
 import UnlockedNotes from './pages/UnlockedNotes';
 import UpdatesPage from './pages/Updates';
+import NotificationsPage from './pages/Notifications';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/chat" element={<StudentChat />} />
         <Route path="/unlocked" element={<UnlockedNotes />} />
         <Route path="/updates" element={<UpdatesPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
       </Routes>
     </>
   );

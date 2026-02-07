@@ -106,6 +106,15 @@ router.put('/purchase/:id', verifyAdmin, async (req, res) => {
                 await new ChatRoom({ studentId: request.studentId, relatedNoteId: request.noteId }).save();
             }
         }
+
+        // NOTIFY STUDENT
+        await Notification.create({
+            userId: request.studentId,
+            message: `Your Purchase Request was ${status}`,
+            type: 'request',
+            link: '/unlocked'
+        });
+
         res.json(request);
     } catch (err) {
         res.status(500).json({ message: err.message });
@@ -166,6 +175,15 @@ router.put('/mentorship/:id', verifyAdmin, async (req, res) => {
                 await exists.save();
             }
         }
+
+        // NOTIFY STUDENT
+        await Notification.create({
+            userId: request.studentId,
+            message: `Your Mentorship Request was ${status}`,
+            type: 'request',
+            link: '/mentorship'
+        });
+
         res.json(request);
     } catch (err) {
         res.status(500).json({ message: err.message });

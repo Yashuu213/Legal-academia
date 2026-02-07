@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Update = require('../models/Update');
+const User = require('../models/User');
+const Notification = require('../models/Notification');
 const { protect, admin } = require('../middleware/authMiddleware');
 
 // @desc    Get all updates
@@ -31,6 +33,19 @@ router.post('/', protect, admin, async (req, res) => {
         });
 
         const createdUpdate = await update.save();
+
+        // NOTIFICATION TRIGGER: Notify all students
+        const students = await User.find({ role: 'student' });
+        if (students.length > 0) {
+            const notifications = students.map(student => ({
+                userId: student._id,
+                message: `New Update Posted: ${title}`,
+                type: 'update',
+                link: '/updates'
+            }));
+            await Notification.insertMany(notifications);
+        }
+
         res.status(201).json(createdUpdate);
     } catch (err) {
         res.status(400).json({ message: err.message });
