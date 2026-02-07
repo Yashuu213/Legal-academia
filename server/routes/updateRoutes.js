@@ -3,7 +3,7 @@ const router = express.Router();
 const Update = require('../models/Update');
 const User = require('../models/User');
 const Notification = require('../models/Notification');
-const { protect, admin } = require('../middleware/authMiddleware');
+const { verifyToken, verifyAdmin } = require('../middleware/authMiddleware');
 
 // @desc    Get all updates
 // @route   GET /api/updates
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 // @desc    Create a new update
 // @route   POST /api/updates
 // @access  Private (Admin only)
-router.post('/', protect, admin, async (req, res) => {
+router.post('/', verifyToken, verifyAdmin, async (req, res) => {
     const { title, description, link, type } = req.body;
 
     try {
@@ -55,7 +55,7 @@ router.post('/', protect, admin, async (req, res) => {
 // @desc    Delete an update
 // @route   DELETE /api/updates/:id
 // @access  Private (Admin only)
-router.delete('/:id', protect, admin, async (req, res) => {
+router.delete('/:id', verifyToken, verifyAdmin, async (req, res) => {
     try {
         const update = await Update.findById(req.params.id);
 
