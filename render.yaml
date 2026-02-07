@@ -46,4 +46,4 @@ services:
         fromService:
           type: web
           name: legal-academia-server
-          property: url
+          property: host
