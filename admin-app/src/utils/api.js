@@ -1,17 +1,21 @@
 import axios from 'axios';
 
 const getBaseUrl = () => {
+    // 1. Check for VITE_API_URL from environment (Render injection)
     let url = import.meta.env.VITE_API_URL;
-    console.log("VITE_API_URL:", url); // Debugging
+    console.log("VITE_API_URL:", url);
 
-    if (!url) return 'http://127.0.0.1:5000/api';
+    // 2. HARDCODED FALLBACK: If env is missing or localhost (development fallback failure)
+    // This ensures production always hits the right backend.
+    if (!url || url.includes('localhost') || url.includes('127.0.0.1')) {
+        return 'https://legal-academia-server.onrender.com/api';
+    }
 
-    // If it's just a hostname (Render injects this via property: host)
+    // 3. Robust Construction (for Render's property: host)
     if (!url.startsWith('http')) {
         url = `https://${url}`;
     }
 
-    // Ensure it ends with /api
     if (!url.endsWith('/api')) {
         url = `${url}/api`;
     }
