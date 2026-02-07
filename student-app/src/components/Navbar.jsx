@@ -15,6 +15,7 @@ const Navbar = () => {
                 </Link>
                 <div className="flex items-center space-x-6">
                     <Link to="/" className="text-gray-300 hover:text-[#C5A059]">Marketplace</Link>
+                    <Link to="/updates" className="text-gray-300 hover:text-[#C5A059]">Updates & Opps</Link>
                     {user ? (
                         <>
                             <Link to="/unlocked" className="text-gray-300 hover:text-[#C5A059]">My Notes</Link>

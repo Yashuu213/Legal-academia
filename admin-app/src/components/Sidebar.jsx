@@ -13,6 +13,7 @@ const Sidebar = () => {
         { path: '/users', label: 'Users', icon: Users },
         { path: '/notes', label: 'Notes Manager', icon: FileText },
         { path: '/requests', label: 'Requests', icon: ListChecks },
+        { path: '/updates', label: 'Updates & Opps', icon: FileText },
         { path: '/chat', label: 'Chat', icon: MessageSquare },
     ];
 

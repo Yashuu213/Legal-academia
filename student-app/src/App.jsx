@@ -7,6 +7,7 @@ import NoteDetails from './pages/NoteDetails';
 import Mentorship from './pages/Mentorship';
 import StudentChat from './pages/StudentChat';
 import UnlockedNotes from './pages/UnlockedNotes';
+import UpdatesPage from './pages/Updates';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/mentorship" element={<Mentorship />} />
         <Route path="/chat" element={<StudentChat />} />
         <Route path="/unlocked" element={<UnlockedNotes />} />
+        <Route path="/updates" element={<UpdatesPage />} />
       </Routes>
     </>
   );

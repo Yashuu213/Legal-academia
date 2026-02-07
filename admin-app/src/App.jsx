@@ -7,6 +7,7 @@ import NotesPage from './pages/Notes';
 import RequestsPage from './pages/Requests';
 import ChatPage from './pages/Chat';
 import NotificationsPage from './pages/Notifications';
+import UpdatesPage from './pages/Updates';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/requests" element={<RequestsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/updates" element={<UpdatesPage />} />
       </Route>
     </Routes>
   );
