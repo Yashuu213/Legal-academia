@@ -44,7 +44,7 @@ router.post('/verify-payment', verifyToken, (req, res) => {
             const aiResult = await verifyPaymentScreenshot(req.file.path, req.file.mimetype);
 
             let aiStatus = 'doubtful';
-            if (aiResult.isValid && aiResult.confidence > 80) aiStatus = 'verified';
+            if (aiResult.isValid && aiResult.confidence > 60) aiStatus = 'verified';
 
             // 2. Save Request
             const newRequest = new PurchaseRequest({
@@ -79,6 +79,11 @@ router.get('/purchase', verifyAdmin, async (req, res) => {
 router.put('/purchase/:id', verifyAdmin, async (req, res) => {
     try {
         const { status } = req.body; // accepted, rejected
+        if (status === 'rejected') {
+            await PurchaseRequest.findByIdAndDelete(req.params.id);
+            return res.json({ message: 'Request Rejected and Deleted' });
+        }
+
         const request = await PurchaseRequest.findByIdAndUpdate(req.params.id, { status }, { new: true });
 
         if (status === 'accepted') {
@@ -102,6 +107,17 @@ router.put('/purchase/:id', verifyAdmin, async (req, res) => {
             }
         }
         res.json(request);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+
+router.delete('/purchase/:id', verifyAdmin, async (req, res) => {
+    console.log(`DELETE /purchase/${req.params.id} hit`);
+    try {
+        await PurchaseRequest.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Request Deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -134,6 +150,11 @@ router.get('/mentorship', verifyAdmin, async (req, res) => {
 router.put('/mentorship/:id', verifyAdmin, async (req, res) => {
     try {
         const { status } = req.body;
+        if (status === 'rejected') {
+            await MentorshipRequest.findByIdAndDelete(req.params.id);
+            return res.json({ message: 'Request Rejected and Deleted' });
+        }
+
         const request = await MentorshipRequest.findByIdAndUpdate(req.params.id, { status }, { new: true });
 
         if (status === 'accepted') {
@@ -146,6 +167,16 @@ router.put('/mentorship/:id', verifyAdmin, async (req, res) => {
             }
         }
         res.json(request);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+router.delete('/mentorship/:id', verifyAdmin, async (req, res) => {
+    console.log(`DELETE /mentorship/${req.params.id} hit`);
+    try {
+        await MentorshipRequest.findByIdAndDelete(req.params.id);
+        res.json({ message: 'Request Deleted' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }

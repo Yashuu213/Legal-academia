@@ -1,10 +1,12 @@
 import { useState, useContext } from 'react';
 import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
-import { Send } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Send, X } from 'lucide-react';
 
 const Mentorship = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({ topic: '', subject: '', reason: '', preferredTime: '', message: '' });
 
     const handleSubmit = async (e) => {
@@ -20,7 +22,13 @@ const Mentorship = () => {
 
     return (
         <div className="min-h-screen bg-[#0f172a] p-8 pt-20 flex justify-center">
-            <div className="bg-[#1e293b] p-8 rounded-xl shadow-xl w-full max-w-2xl border-t-4 border-[#C5A059]">
+            <div className="bg-[#1e293b] p-8 rounded-xl shadow-xl w-full max-w-2xl border-t-4 border-[#C5A059] relative">
+                <button
+                    onClick={() => navigate('/')}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
+                >
+                    <X size={24} />
+                </button>
                 <h2 className="text-3xl font-bold text-white mb-6 font-playfair">Request Mentorship</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">

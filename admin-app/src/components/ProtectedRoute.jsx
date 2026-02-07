@@ -10,9 +10,9 @@ const ProtectedRoute = () => {
     if (!user) return <Navigate to="/login" />;
 
     return (
-        <div className="flex bg-gray-100 min-h-screen">
+        <div className="flex bg-gray-100 h-screen overflow-hidden">
             <Sidebar />
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 h-full overflow-y-auto">
                 <Outlet />
             </div>
         </div>

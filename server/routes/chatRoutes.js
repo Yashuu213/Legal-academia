@@ -47,4 +47,15 @@ router.get('/:roomId/messages', verifyToken, async (req, res) => {
     }
 });
 
+// Delete Chat Room (Admin Only)
+router.delete('/:roomId', verifyAdmin, async (req, res) => {
+    try {
+        await Message.deleteMany({ chatRoomId: req.params.roomId });
+        await ChatRoom.findByIdAndDelete(req.params.roomId);
+        res.json({ message: 'Chat deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 module.exports = router;

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, FileText, MessageSquare, ListChecks, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, MessageSquare, ListChecks, LogOut, Bell } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
@@ -9,6 +9,7 @@ const Sidebar = () => {
 
     const links = [
         { path: '/', label: 'Overview', icon: LayoutDashboard },
+        { path: '/notifications', label: 'Notifications', icon: Bell }, // New Link
         { path: '/users', label: 'Users', icon: Users },
         { path: '/notes', label: 'Notes Manager', icon: FileText },
         { path: '/requests', label: 'Requests', icon: ListChecks },

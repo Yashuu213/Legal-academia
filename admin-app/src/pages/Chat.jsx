@@ -2,7 +2,7 @@ import { useEffect, useState, useContext, useRef } from 'react';
 import api from '../utils/api';
 import { AuthContext } from '../context/AuthContext';
 import io from 'socket.io-client';
-import { Send, Image, Video } from 'lucide-react';
+import { Send, Image, Video, Trash2 } from 'lucide-react';
 
 // Use VITE_API_URL for socket, but remove '/api' suffix if present, or fallback to localhost
 const SOCKET_URL = import.meta.env.VITE_API_URL
@@ -113,6 +113,23 @@ const ChatPage = () => {
         }
     };
 
+    const handleDeleteChat = async () => {
+        if (!currentRoom) return;
+        if (!window.confirm("Are you sure you want to delete this chat? This action cannot be undone.")) return;
+
+        try {
+            await api.delete(`/chat/${currentRoom._id}`);
+            setRooms(prev => prev.filter(r => r._id !== currentRoom._id));
+            setCurrentRoom(null);
+            setMessages([]);
+        } catch (err) {
+            console.error("Failed to delete chat:", err);
+            const errorMessage = err.response?.data?.message || err.message || "Unknown error";
+            const status = err.response?.status;
+            alert(`Failed to delete chat (Status: ${status}): ${errorMessage}`);
+        }
+    };
+
     return (
         <div className="flex h-screen pt-4 pb-4 pr-4">
             {/* Sidebar List */}
@@ -138,6 +155,13 @@ const ChatPage = () => {
                     <>
                         <div className="p-4 bg-white border-b flex justify-between items-center rounded-tr-lg">
                             <h3 className="font-bold">{currentRoom.studentId?.name}</h3>
+                            <button
+                                onClick={handleDeleteChat}
+                                className="p-2 text-red-500 hover:bg-red-50 rounded-full"
+                                title="Delete Chat"
+                            >
+                                <Trash2 size={20} />
+                            </button>
                         </div>
                         <div className="flex-1 overflow-y-auto p-4 space-y-4">
                             {messages.map((msg, idx) => (

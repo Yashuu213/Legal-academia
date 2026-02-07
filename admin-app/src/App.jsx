@@ -6,6 +6,7 @@ import UsersPage from './pages/Users';
 import NotesPage from './pages/Notes';
 import RequestsPage from './pages/Requests';
 import ChatPage from './pages/Chat';
+import NotificationsPage from './pages/Notifications';
 
 const App = () => {
   return (
@@ -16,7 +17,9 @@ const App = () => {
         <Route path="/users" element={<UsersPage />} />
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/requests" element={<RequestsPage />} />
+        <Route path="/requests" element={<RequestsPage />} />
         <Route path="/chat" element={<ChatPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
       </Route>
     </Routes>
   );
