@@ -3,7 +3,7 @@ services:
   - type: web
     name: legal-academia-server
     env: node
-    rootCommand: cd server
+    rootDir: server
     buildCommand: npm install
     startCommand: npm start
     plan: free
@@ -22,7 +22,7 @@ services:
   - type: web
     name: legal-academia-student
     env: node
-    rootCommand: cd student-app
+    rootDir: student-app
     buildCommand: npm install && npm run build
     startCommand: npx serve -s dist -p $PORT
     plan: free
@@ -37,7 +37,7 @@ services:
   - type: web
     name: legal-academia-admin
     env: node
-    rootCommand: cd admin-app
+    rootDir: admin-app
     buildCommand: npm install && npm run build
     startCommand: npx serve -s dist -p $PORT
     plan: free
