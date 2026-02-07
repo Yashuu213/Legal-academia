@@ -1,17 +1,21 @@
 import axios from 'axios';
 
 const getBaseUrl = () => {
-    // 1. Check for VITE_API_URL from environment (Render injection)
+    // 1. Development Environment (Localhost)
+    if (import.meta.env.DEV) {
+        return 'http://localhost:5000/api';
+    }
+
+    // 2. Production Environment (Render)
     let url = import.meta.env.VITE_API_URL;
     console.log("VITE_API_URL:", url);
 
-    // 2. HARDCODED FALLBACK: If env is missing or localhost (development fallback failure)
-    // This ensures production always hits the right backend.
-    if (!url || url.includes('localhost') || url.includes('127.0.0.1')) {
+    // Hardcoded Fallback for Production
+    if (!url) {
         return 'https://legal-academia-server.onrender.com/api';
     }
 
-    // 3. Robust Construction (for Render's property: host)
+    // Robust Construction
     if (!url.startsWith('http')) {
         url = `https://${url}`;
     }
@@ -20,7 +24,6 @@ const getBaseUrl = () => {
         url = `${url}/api`;
     }
 
-    console.log("Final Base URL:", url);
     return url;
 };
 
