@@ -26,11 +26,17 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const connectDB = async () => {
     try {
         const username = process.env.DB_USER || 'Law_database';
-        const password = process.env.DB_PASS || 'Law_database@123'; // Fallback or from env
+        const password = process.env.DB_PASS || 'Legal academia@123'; // Fallback or from env
         const cluster = 'cluster0.jreximg.mongodb.net';
         const dbName = 'law-platform';
 
-        const uri = process.env.MONGO_URI || `mongodb+srv://${username}:${encodeURIComponent(password)}@${cluster}/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
+        // Construct URI dynamically (Matches seed.js which worked)
+        const constructedUri = `mongodb+srv://${username}:${encodeURIComponent(password)}@${cluster}/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
+
+        // Use MONGO_URI from env if valid, otherwise use constructed one
+        const uri = (process.env.MONGO_URI && process.env.MONGO_URI.startsWith('mongodb'))
+            ? process.env.MONGO_URI
+            : constructedUri;
 
         console.log(`Connecting to MongoDB Atlas...`);
 
