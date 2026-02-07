@@ -13,7 +13,10 @@ const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: '*', // Allow all for now to fix connection issues
+    credentials: true
+}));
 app.use(express.json());
 
 // Serve Static Assets (Images/Videos)
@@ -27,15 +30,14 @@ const connectDB = async () => {
         const cluster = 'cluster0.jreximg.mongodb.net';
         const dbName = 'law-platform';
 
-        const uri = `mongodb+srv://${username}:${encodeURIComponent(password)}@${cluster}/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
+        const uri = process.env.MONGO_URI || `mongodb+srv://${username}:${encodeURIComponent(password)}@${cluster}/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
 
-        console.log(`Connecting to MongoDB Atlas as ${username}...`);
+        console.log(`Connecting to MongoDB Atlas...`);
 
         await mongoose.connect(uri);
         console.log('✅ MongoDB Connected successfully!');
     } catch (err) {
         console.error('❌ MongoDB Connection Error:', err.message);
-        // process.exit(1); // Keep alive to see error
     }
 }
 connectDB();
@@ -57,7 +59,7 @@ app.use('/api/notifications', require('./routes/notificationRoutes'));
 // Socket.io for Realtime Chat
 const io = new Server(server, {
     cors: {
-        origin: "*", // Allow all for dev
+        origin: "*",
         methods: ["GET", "POST"]
     }
 });
