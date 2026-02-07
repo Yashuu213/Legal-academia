@@ -19,7 +19,7 @@ services:
         sync: false
 
   # 2️⃣ STUDENT APP (React Frontend)
-  - type: static
+  - type: site
     name: legal-academia-student
     env: static
     rootCommand: cd student-app
@@ -37,7 +37,7 @@ services:
           property: url
 
   # 3️⃣ ADMIN APP (React Frontend)
-  - type: static
+  - type: site
     name: legal-academia-admin
     env: static
     rootCommand: cd admin-app
