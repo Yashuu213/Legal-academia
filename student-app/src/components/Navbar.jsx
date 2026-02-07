@@ -11,7 +11,7 @@ const Navbar = () => {
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <Link to="/" className="flex items-center space-x-2">
                     <Scale className="text-[#C5A059]" />
-                    <span className="text-xl font-bold font-playfair text-white">Lex <span className="text-[#C5A059]">Prime</span></span>
+                    <span className="text-xl font-bold font-playfair text-white">Legal <span className="text-[#C5A059]">Academia</span></span>
                 </Link>
                 <div className="flex items-center space-x-6">
                     <Link to="/" className="text-gray-300 hover:text-[#C5A059]">Marketplace</Link>

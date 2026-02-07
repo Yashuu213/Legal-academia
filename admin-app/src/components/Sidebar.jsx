@@ -19,7 +19,7 @@ const Sidebar = () => {
     return (
         <div className="w-64 h-screen bg-gray-900 text-gray-100 flex flex-col">
             <div className="p-6 border-b border-gray-800">
-                <h1 className="text-2xl font-bold text-blue-500">Law Admin</h1>
+                <h1 className="text-2xl font-bold text-blue-500">Legal Academia</h1>
             </div>
             <nav className="flex-1 p-4 space-y-2">
                 {links.map((link) => {
