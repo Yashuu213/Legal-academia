@@ -4,10 +4,15 @@ import { AuthContext } from '../context/AuthContext';
 import io from 'socket.io-client';
 import { Send } from 'lucide-react';
 
-// Use VITE_API_URL for socket, but remove '/api' suffix if present, or fallback to localhost
-const SOCKET_URL = import.meta.env.VITE_API_URL
-    ? import.meta.env.VITE_API_URL.replace('/api', '')
-    : 'http://127.0.0.1:5000';
+// Helper to determine Socket URL from Env Var (handles full URL or just Hostname)
+const getSocketUrl = () => {
+    const url = import.meta.env.VITE_API_URL;
+    if (!url) return 'http://127.0.0.1:5000';
+    if (url.startsWith('http')) return url.replace('/api', '');
+    return `https://${url}`;
+};
+
+const SOCKET_URL = getSocketUrl();
 
 const socket = io(SOCKET_URL);
 
