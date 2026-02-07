@@ -24,7 +24,7 @@ services:
     env: node
     rootDir: student-app
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -p $PORT
+    startCommand: node server.js
     plan: free
     envVars:
       - key: VITE_API_URL
@@ -39,7 +39,7 @@ services:
     env: node
     rootDir: admin-app
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -p $PORT
+    startCommand: node server.js
     plan: free
     envVars:
       - key: VITE_API_URL
