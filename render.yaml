@@ -18,12 +18,13 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-staticSites:
   # 2️⃣ STUDENT APP (Static Site - Free)
-  - name: legal-academia-student-static
+  - type: web
+    name: legal-academia-student-static
+    env: static
     rootDir: student-app
     buildCommand: npm install && npm run build
-    publishDir: dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
@@ -36,11 +37,12 @@ staticSites:
           property: host
 
   # 3️⃣ ADMIN APP (Static Site - Free)
-  - name: legal-academia-admin-static
-
+  - type: web
+    name: legal-academia-admin-static
+    env: static
     rootDir: admin-app
     buildCommand: npm install && npm run build
-    publishDir: dist
+    staticPublishPath: dist
     routes:
       - type: rewrite
         source: /*
