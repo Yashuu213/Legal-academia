@@ -20,7 +20,7 @@ services:
 
 staticSites:
   # 2️⃣ STUDENT APP (Static Site - Free)
-  - name: legal-academia-student
+  - name: legal-academia-student-static
     rootDir: student-app
     buildCommand: npm install && npm run build
     publishDir: dist
@@ -36,7 +36,8 @@ staticSites:
           property: host
 
   # 3️⃣ ADMIN APP (Static Site - Free)
-  - name: legal-academia-admin
+  - name: legal-academia-admin-static
+
     rootDir: admin-app
     buildCommand: npm install && npm run build
     publishDir: dist
