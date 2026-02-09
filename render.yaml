@@ -18,14 +18,16 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-  # 2️⃣ STUDENT APP (React Frontend - Served as Web Service)
-  - type: web
-    name: legal-academia-student
-    env: node
+staticSites:
+  # 2️⃣ STUDENT APP (Static Site - Free)
+  - name: legal-academia-student
     rootDir: student-app
     buildCommand: npm install && npm run build
-    startCommand: node server.js
-    plan: free
+    publishDir: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_API_URL
         fromService:
@@ -33,14 +35,15 @@ services:
           name: legal-academia-server
           property: host
 
-  # 3️⃣ ADMIN APP (React Frontend - Served as Web Service)
-  - type: web
-    name: legal-academia-admin
-    env: node
+  # 3️⃣ ADMIN APP (Static Site - Free)
+  - name: legal-academia-admin
     rootDir: admin-app
     buildCommand: npm install && npm run build
-    startCommand: node server.js
-    plan: free
+    publishDir: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
       - key: VITE_API_URL
         fromService:

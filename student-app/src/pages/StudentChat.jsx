@@ -7,7 +7,9 @@ import { Send } from 'lucide-react';
 // Helper to determine Socket URL from Env Var (handles full URL or just Hostname)
 const getSocketUrl = () => {
     const url = import.meta.env.VITE_API_URL;
-    if (!url) return 'http://127.0.0.1:5000';
+    if (!url) {
+        return import.meta.env.DEV ? 'http://127.0.0.1:5000' : 'https://legal-academia-server.onrender.com';
+    }
     if (url.startsWith('http')) return url.replace('/api', '');
     return `https://${url}`;
 };

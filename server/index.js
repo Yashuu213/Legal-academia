@@ -101,4 +101,32 @@ io.on('connection', (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Keep-Alive Mechanism (Prevents Free Tier Sleep)
+app.get('/api/ping', (req, res) => {
+    res.status(200).send('Pong: Server is alive');
+});
+
+const SELF_PING_URL = process.env.PUBLIC_URL || 'https://legal-academia-server.onrender.com';
+
+const keepAlive = () => {
+    // Ping every 14 minutes (14 * 60 * 1000)
+    setInterval(async () => {
+        try {
+            console.log(`Pinging myself at ${SELF_PING_URL}/api/ping...`);
+            const response = await fetch(`${SELF_PING_URL}/api/ping`);
+            if (response.ok) {
+                console.log('✅ Self-ping successful');
+            } else {
+                console.log(`⚠️ Self-ping failed with status: ${response.status}`);
+            }
+        } catch (err) {
+            console.error('❌ Self-ping error:', err.message);
+        }
+    }, 14 * 60 * 1000);
+};
+
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+    keepAlive();
+});

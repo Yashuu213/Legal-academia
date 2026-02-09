@@ -12,6 +12,7 @@ const getBaseUrl = () => {
 
     // Hardcoded Fallback for Production
     if (!url) {
+        console.warn('VITE_API_URL not found, using fallback.');
         return 'https://legal-academia-server.onrender.com/api';
     }
 
