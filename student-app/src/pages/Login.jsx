@@ -13,7 +13,9 @@ const Login = () => {
         try {
             await login(email, password);
         } catch (err) {
-            alert('Login failed');
+            console.error("Login request failed:", err);
+            const errorMessage = err.response?.data?.message || err.message || "Login failed";
+            alert(`Login Failed: ${errorMessage}`);
         }
     };
 
