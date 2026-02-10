@@ -6,8 +6,6 @@ services:
     rootDir: server
     buildCommand: npm install
     startCommand: npm start
-    plan: free
-    autoDeploy: false
     envVars:
       - key: NODE_ENV
         value: production
@@ -18,7 +16,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-  # STUDENT APP (Static Site - Free)
+  # STUDENT APP (Static Site)
   - type: web
     name: legal-academia-student-static
     env: static
@@ -33,7 +31,7 @@ services:
       - key: VITE_API_URL
         value: https://legal-academia-server.onrender.com
 
-  # ADMIN APP (Static Site - Free)
+  # ADMIN APP (Static Site)
   - type: web
     name: legal-academia-admin-static
     env: static
