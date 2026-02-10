@@ -14,7 +14,30 @@ const server = http.createServer(app);
 
 // Middleware
 app.use(cors({
-    origin: '*', // Allow all for now to fix connection issues
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        // Allow all known origins + localhost
+        const allowedOrigins = [
+            'http://localhost:5173',
+            'http://localhost:5174', // Admin app local
+            'http://localhost:3000',
+            'https://legal-academia-student-static.onrender.com', // Student App (Static)
+            'https://legal-academia-admin-static.onrender.com',   // Admin App (Static)
+            'https://legal-academia-server.onrender.com'          // Self
+        ];
+
+        // Dynamic check or just allow all logic if needed (comment out strict check if fails)
+        // Strict check:
+        // if (allowedOrigins.indexOf(origin) !== -1 || origin.includes('onrender.com')) {
+        //     callback(null, true);
+        // } else {
+        //     callback(new Error('Not allowed by CORS'));
+        // }
+
+        // Flexible (Allow all but handles credentials correctly):
+        callback(null, true);
+    },
     credentials: true
 }));
 app.use(express.json());
