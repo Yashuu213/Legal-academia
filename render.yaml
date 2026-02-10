@@ -1,7 +1,6 @@
 services:
-  # BACKEND (Node.js API)
   - type: web
-    name: legal-academia-server
+    name: legal-server
     env: node
     rootDir: server
     buildCommand: npm install
@@ -15,33 +14,3 @@ services:
         sync: false
       - key: GEMINI_API_KEY
         sync: false
-
-  # STUDENT APP (Static Site)
-  - type: web
-    name: legal-academia-student-static
-    env: static
-    rootDir: student-app
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        value: https://legal-academia-server.onrender.com
-
-  # ADMIN APP (Static Site)
-  - type: web
-    name: legal-academia-admin-static
-    env: static
-    rootDir: admin-app
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        value: https://legal-academia-server.onrender.com
