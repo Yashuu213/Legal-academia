@@ -1,5 +1,5 @@
 services:
-  # 1️⃣ BACKEND (Node.js API)
+  # BACKEND (Node.js API)
   - type: web
     name: legal-academia-server
     env: node
@@ -18,7 +18,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
 
-  # 2️⃣ STUDENT APP (Static Site - Free)
+  # STUDENT APP (Static Site - Free)
   - type: web
     name: legal-academia-student-static
     env: static
@@ -31,12 +31,9 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: legal-academia-server
-          property: host
+        value: https://legal-academia-server.onrender.com
 
-  # 3️⃣ ADMIN APP (Static Site - Free)
+  # ADMIN APP (Static Site - Free)
   - type: web
     name: legal-academia-admin-static
     env: static
@@ -49,7 +46,4 @@ services:
         destination: /index.html
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: legal-academia-server
-          property: host
+        value: https://legal-academia-server.onrender.com

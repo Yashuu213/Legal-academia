@@ -1,149 +1,169 @@
-# ⚖️ Legal Academia - Smart Law Education Platform
+# ⚖️ Legal-Academia Platform
 
-> **A comprehensive EdTech platform connecting Law Students with Premium Notes, Expert Mentorship, and AI-Powered Assistance.**
+![Project Banner](assets/banner.svg)
 
-![Project Banner](https://via.placeholder.com/1200x400?text=Legal+Academia+Platform+Banner) *add your banner here*
+<div align="center">
 
-## 🚀 Project Overview
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Gemini AI](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=for-the-badge&logo=google&logoColor=white)](https://deepmind.google/technologies/gemini/)
 
-**Legal Academia** is a dual-interface web application designed to simplify legal education. It bridges the gap between students needing quality resources and mentors providing guidance.
-The platform features a robust **AI-Verification System** for payments, ensuring only legitimate transaction receipts (UPI, Bank Transfer) unlock premium content, filtering out spam/fake uploads automatically.
+<br />
 
-### 🌟 Key Features
+**A comprehensive EdTech platform connecting Law Students with Premium Notes, Expert Mentorship, and AI-Powered Assistance.**
 
-#### 🎓 For Students (`/student-app`)
-- **Note Marketplace**: Browse and search categorised legal notes (Constitution, IPC, Torts, etc.).
-- **Smart Purchase Flow**: 
-  - Upload payment screenshots directly.
-  - **Instant AI Verification**: If the receipt is valid (UTR + Amount + Success), access is granted automatically in many cases (or sent for rapid admin approval).
-- **Mentorship Booking**: Request 1:1 sessions with legal experts.
-- **Real-Time Chat**: Chat with mentors/admins for doubt clearing (Socket.io).
-- **Secure File Access**: View purchased PDFs securely in-browser.
+[View Demo](#) · [Report Bug](#) · [Request Feature](#)
 
-#### 🛡️ For Admins (`/admin-app`)
-- **Command Center**: Dashboard to view total users, notes, and revenue.
-- **AI-Assisted Request Management**:
-  - **Verified Tab**: Requests cleared by AI (High Confidence).
-  - **Doubtful Tab ⚠️**: Suspicious uploads (Selfies, Random images, Fake receipts) flagged by AI for manual review.
-- **Content Management**: Upload and manage PDF notes and categories.
-- **User Management**: Oversee student and mentor accounts.
+</div>
 
 ---
+
+## 🚀 Overview
+
+**Legal Academia** is a dual-interface web application designed to revolutionize legal education. It seamlessly bridges the gap between students seeking high-quality legal resources and mentors offering expert guidance.
+
+At its core, the platform leverages **Google's Gemini AI** to automate complex administrative tasks, such as verifying payment screenshots for premium content access. This ensures a secure, spam-free environment for content creators and instant access for students.
+
+## 🏗️ System Architecture
+
+```mermaid
+graph TD
+    subgraph "Student Application"
+        S[Student User] -->|Browses Notes| UI_S[Student UI]
+        UI_S -->|Uploads Payment Screenshot| API[Backend API]
+        UI_S -->|Real-time Chat| Socket[Socket.io Server]
+    end
+
+    subgraph "Admin Application"
+        A[Admin User] -->|Manages Content| UI_A[Admin UI]
+        UI_A -->|Reviews Requests| API
+        UI_A -->|Monitors Analytics| API
+    end
+
+    subgraph "Backend Services"
+        API -->|Auth & Data| DB[(MongoDB Atlas)]
+        API -->|Verify Payment| AI[Gemini Vision API]
+        AI -->|Returns Confidence Score| API
+        API -->|Stores Files| Storage[File System/Cloud]
+    end
+
+    style AI fill:#f9f,stroke:#333,stroke-width:2px
+    style DB fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+## 🌟 Key Features
+
+### 🎓 Student Portal
+*   **📚 Premium Note Marketplace**: Access categorized legal notes (Constitution, IPC, Torts, etc.).
+*   **🤖 AI-Powered Instant Access**: Upload your payment screenshot. Our AI analyzes it instantly. If valid (correct amount, UTR, success status), you get **immediate access**.
+*   **👨‍⚖️ Expert Mentorship**: Book 1:1 sessions with legal experts.
+*   **💬 Real-Time Chat**: Integrated chat for instant doubt resolution with mentors.
+*   **🔒 Secure Viewer**: Read purchased notes securely within the browser.
+
+### 🛡️ Admin Dashboard
+*   **📊 Analytics Command Center**: Visualize total users, revenue, and active notes.
+*   **✨ Smart Request Management**:
+    *   **Auto-Verified**: Requests cleared by AI.
+    *   **Suspicious Flagging ⚠️**: AI detects fake receipts, selfies, or wrong amounts and flags them for manual review.
+*   **📝 Content Management**: inclusive tools for uploading and categorizing PDF notes.
 
 ## 🛠️ Tech Stack
 
-| Component | Technology |
+| Domain | Technologies |
 | :--- | :--- |
-| **Frontend** | React.js (Vite), Tailwind CSS, Lucide Icons |
-| **Backend** | Node.js, Express.js |
-| **Database** | MongoDB Atlas (Cloud) |
-| **AI Engine** | **Google Gemini 1.5 Pro/Flash** (Multimodal Vision API) |
-| **Real-time** | Socket.io (Bi-directional communication) |
-| **Storage** | Multer (Local/Cloud), PDF Handling |
-| **Security** | JWT Authentication, BCrypt Hashing, CORS |
+| **Frontend** | React.js (Vite), Tailwind CSS, Lucide Icons, Framer Motion |
+| **Backend** | Node.js, Express.js, Socket.io |
+| **Database** | MongoDB Atlas |
+| **AI / ML** | **Google Gemini 1.5 Flash** (Multimodal Vision API) |
+| **Authentication** | JWT (JSON Web Tokens), BCrypt |
+| **DevOps** | Render (Deployment), GitHub Actions (CI/CD) |
 
----
+## ⚡ Getting Started
 
-## 🤖 AI Integration (Gemini 1.5)
+Follow these steps to set up the project locally on your machine.
 
-We utilize the **Google Gemini Generative AI** model to automate administrative overhead.
+### Prerequisites
 
-### 1. Payment Proof Analysis
-- **Model**: `gemini-1.5-flash` (Optimized for speed & cost)
-- **Logic**: Inspects uploaded screenshots for:
-  - ✅ **Transaction ID / UTR** (Critical)
-  - ✅ **Amount** (Numeric Validation)
-  - ✅ **Success Status** (Green Tick / "Paid")
-- **Outcome**: 
-  - If valid -> Auto-tags as `Verified`.
-  - If invalid (e.g., selfie, logo) -> Tags as `Doubtful` with confidence score `0%`.
+*   Node.js (v16 or higher)
+*   npm or yarn
+*   MongoDB Atlas Account
+*   Google AI Studio API Key
 
----
+### Installation
 
-## 📂 Project Structure
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/Yashuu213/Legal-academia.git
+    cd Legal-academia
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    # Install server dependencies
+    cd server
+    npm install
+
+    # Install client dependencies
+    cd ../admin-app
+    npm install
+    cd ../student-app
+    npm install
+    ```
+
+3.  **Environment Configuration**
+    Create a `.env` file in the `server` directory:
+    ```env
+    PORT=5000
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_secure_jwt_secret
+    GEMINI_API_KEY=your_gemini_api_key
+    ```
+
+4.  **Run the Application**
+    Open three separate terminal windows:
+
+    *   **Terminal 1 (Server):**
+        ```bash
+        cd server
+        npm start
+        ```
+    *   **Terminal 2 (Admin App):**
+        ```bash
+        cd admin-app
+        npm run dev
+        ```
+    *   **Terminal 3 (Student App):**
+        ```bash
+        cd student-app
+        npm run dev
+        ```
+
+## 📱 Application Structure
 
 ```bash
 Legal-academia/
-├── server/             # Node.js Express Backend
-│   ├── models/         # MongoDB Schemas
-│   ├── routes/         # API Endpoints
-│   ├── utils/          # AI Service & Helpers
-│   └── uploads/        # Stored Files
-├── admin-app/          # Admin Dashboard (React)
-│   ├── src/pages/      # Request & Content Management
-│   └── src/components/ # Reusable UI
-└── student-app/        # Student Portal (React)
-    ├── src/pages/      # Marketplace & Profile
-    └── src/components/ # Chat & Note Viewer
+├── server/                 # REST API & Socket Server
+│   ├── models/            # Database Schemas
+│   ├── routes/            # API Route/Controllers
+│   └── utils/             # AI Integration Logic
+├── admin-app/             # React Admin Dashboard
+│   └── src/pages/         # Protected Admin Routes
+└── student-app/           # React Student Interface
+    └── src/pages/         # Public & Protected Student Routes
 ```
-
----
-
-## ⚡ Getting Started (Local Development)
-
-### Prerequisites
-- Node.js (v16+)
-- MongoDB URI (Atlas or Local)
-- Google Gemini API Key
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/Yashuu213/Legal-academia.git
-cd Legal-academia
-```
-
-### 2. Setup Backend
-```bash
-cd server
-npm install
-# Create a .env file
-echo "PORT=5000" >> .env
-echo "MONGO_URI=your_mongodb_connection_string" >> .env
-echo "JWT_SECRET=your_jwt_secret" >> .env
-echo "GEMINI_API_KEY=your_gemini_api_key" >> .env
-npm start
-```
-
-### 3. Setup Frontend (Admin & Student)
-Open two new terminals:
-
-**Admin App:**
-```bash
-cd admin-app
-npm install
-npm run dev
-```
-
-**Student App:**
-```bash
-cd student-app
-npm install
-npm run dev
-```
-
----
-
-## 🔒 Environment Variables
-
-**Do NOT commit your `.env` file.**
-Create a `.env` in `/server` with the following keys:
-
-- `PORT`: 5000
-- `MONGO_URI`: MongoDB Connection String
-- `JWT_SECRET`: Secret key for token generation
-- `GEMINI_API_KEY`: API Key from Google AI Studio
-
----
 
 ## 🤝 Contributing
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
----
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ## 📄 License
 
@@ -151,4 +171,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
-> Built with ❤️ by [Yashuu213](https://github.com/Yashuu213)
+<div align="center">
+  Built with ❤️ by <a href="https://github.com/Yashuu213">Yashuu213</a>
+</div>

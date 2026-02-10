@@ -1,0 +1,49 @@
+<svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C5A059;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E5C079;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="400" fill="url(#grad1)" />
+  
+  <!-- Decorative Elements -->
+  <circle cx="100" cy="100" r="150" fill="#C5A059" opacity="0.05" />
+  <circle cx="1100" cy="300" r="200" fill="#C5A059" opacity="0.05" />
+  
+  <!-- Scales of Justice Icon (Simplified) -->
+  <g transform="translate(535, 80) scale(3)" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z" stroke-opacity="0"/> <!-- Bound box placeholder -->
+    <path d="M12 3v18" />
+    <path d="M5 8h14" />
+    <path d="M5 8v5a3 3 0 0 0 6 0v-5" />
+    <path d="M13 8v5a3 3 0 0 0 6 0v-5" />
+    <circle cx="12" cy="3" r="1" fill="#C5A059" />
+  </g>
+
+  <!-- Title -->
+  <text x="50%" y="240" font-family="'Playfair Display', serif" font-size="80" font-weight="bold" fill="url(#grad2)" text-anchor="middle" filter="url(#glow)">
+    LEGAL ACADEMIA
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="50%" y="300" font-family="sans-serif" font-size="24" fill="#94a3b8" text-anchor="middle" letter-spacing="4">
+    LEARN • MENTOR • EXCEL
+  </text>
+  
+  <!-- Bottom accents -->
+  <rect x="400" y="340" width="400" height="2" fill="#C5A059" opacity="0.5" />
+</svg>

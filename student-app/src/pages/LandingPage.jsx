@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import api from '../utils/api';
+import { AuthContext } from '../context/AuthContext';
 import NoteCard from '../components/NoteCard';
 import { Scale, BookOpen, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
+    const { user } = useContext(AuthContext);
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {
@@ -32,7 +34,7 @@ const LandingPage = () => {
                     <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
                         Premium notes, expert mentorship, and a community of elite law students.
                     </p>
-                    <Link to="/register" className="px-8 py-4 bg-[#C5A059] text-black text-lg font-bold rounded-full hover:bg-[#b08d48] transition">
+                    <Link to={user ? "/unlocked" : "/register"} className="px-8 py-4 bg-[#C5A059] text-black text-lg font-bold rounded-full hover:bg-[#b08d48] transition">
                         Start Learning
                     </Link>
                 </div>
