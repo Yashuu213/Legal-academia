@@ -5,6 +5,7 @@ const noteSchema = new mongoose.Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     fileUrl: { type: String, required: true }, // Path to PDF
+    posterUrl: { type: String }, // Path to Poster Image
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     createdAt: { type: Date, default: Date.now }
 });

@@ -5,7 +5,7 @@ import { Plus, Unlock, Lock } from 'lucide-react';
 const NotesPage = () => {
     const [notes, setNotes] = useState([]);
     const [showForm, setShowForm] = useState(false);
-    const [formData, setFormData] = useState({ title: '', description: '', price: '', file: null });
+    const [formData, setFormData] = useState({ title: '', description: '', price: '', file: null, poster: null });
 
     const fetchNotes = async () => {
         try {
@@ -27,6 +27,9 @@ const NotesPage = () => {
         data.append('description', formData.description);
         data.append('price', formData.price);
         data.append('file', formData.file);
+        if (formData.poster) {
+            data.append('poster', formData.poster);
+        }
 
         try {
             await api.post('/notes', data, {
@@ -70,11 +73,22 @@ const NotesPage = () => {
                             className="col-span-2 p-2 border rounded"
                             onChange={e => setFormData({ ...formData, description: e.target.value })}
                         />
-                        <input
-                            type="file" accept="application/pdf" required
-                            className="col-span-2 p-2 border rounded"
-                            onChange={e => setFormData({ ...formData, file: e.target.files[0] })}
-                        />
+                        <div className="col-span-2 space-y-2">
+                            <label className="block text-sm font-medium text-gray-700">Upload PDF Note *</label>
+                            <input
+                                type="file" accept="application/pdf" required
+                                className="w-full p-2 border rounded"
+                                onChange={e => setFormData({ ...formData, file: e.target.files[0] })}
+                            />
+                        </div>
+                        <div className="col-span-2 space-y-2">
+                            <label className="block text-sm font-medium text-gray-700">Upload Poster/Thumbnail (Optional)</label>
+                            <input
+                                type="file" accept="image/*"
+                                className="w-full p-2 border rounded"
+                                onChange={e => setFormData({ ...formData, poster: e.target.files[0] })}
+                            />
+                        </div>
                         <button type="submit" className="col-span-2 bg-green-600 text-white py-2 rounded">
                             Submit Note
                         </button>
