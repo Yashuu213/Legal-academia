@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, FileText, MessageSquare, ListChecks, LogOut, Bell, X } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, MessageSquare, ListChecks, LogOut, Bell, X, Settings as SettingsIcon } from 'lucide-react';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
@@ -15,6 +15,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         { path: '/requests', label: 'Requests', icon: ListChecks },
         { path: '/updates', label: 'Updates & Opps', icon: FileText },
         { path: '/chat', label: 'Chat', icon: MessageSquare },
+        { path: '/settings', label: 'Settings', icon: SettingsIcon },
     ];
 
     return (

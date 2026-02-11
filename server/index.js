@@ -84,6 +84,7 @@ app.use('/api/upload', require('./routes/uploadRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 app.use('/api/updates', require('./routes/updateRoutes'));
 app.use('/api/notifications', require('./routes/notificationRoutes'));
+app.use('/api/settings', require('./routes/settingRoutes'));
 
 // Socket.io for Realtime Chat
 const io = new Server(server, {
