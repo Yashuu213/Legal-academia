@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import Register from './pages/Register';
 import Login from './pages/Login';
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/updates" element={<UpdatesPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
       </Routes>
+      <Footer />
     </>
   );
 };
