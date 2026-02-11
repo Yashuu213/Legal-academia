@@ -8,6 +8,7 @@ import RequestsPage from './pages/Requests';
 import ChatPage from './pages/Chat';
 import NotificationsPage from './pages/Notifications';
 import UpdatesPage from './pages/Updates';
+import Settings from './pages/Settings';
 
 const App = () => {
   return (
@@ -18,10 +19,10 @@ const App = () => {
         <Route path="/users" element={<UsersPage />} />
         <Route path="/notes" element={<NotesPage />} />
         <Route path="/requests" element={<RequestsPage />} />
-        <Route path="/requests" element={<RequestsPage />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/notifications" element={<NotificationsPage />} />
         <Route path="/updates" element={<UpdatesPage />} />
+        <Route path="/settings" element={<Settings />} />
       </Route>
     </Routes>
   );

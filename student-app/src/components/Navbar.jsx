@@ -4,6 +4,36 @@ import { AuthContext } from '../context/AuthContext';
 import { Scale, LogOut, User, Bell, Menu, X } from 'lucide-react';
 import api from '../utils/api';
 
+const WhatsAppButton = () => {
+    const [link, setLink] = useState('');
+
+    useEffect(() => {
+        const fetchLink = async () => {
+            try {
+                const { data } = await api.get('/settings/whatsapp_group_link');
+                if (data && data.value) setLink(data.value);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchLink();
+    }, []);
+
+    if (!link) return null;
+
+    return (
+        <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-full text-sm font-bold transition mr-2"
+        >
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" className="w-4 h-4" />
+            <span className="hidden lg:inline">Join Group</span>
+        </a>
+    );
+};
+
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const [unreadCount, setUnreadCount] = useState(0);
@@ -61,6 +91,10 @@ const Navbar = () => {
                                     </span>
                                 )}
                             </Link>
+
+                            {/* WhatsApp Group Button */}
+                            <WhatsAppButton />
+
                             <div className="flex items-center space-x-2 text-[#C5A059] border border-[#C5A059] px-3 py-1 rounded-full bg-[#1e293b]">
                                 <User size={16} />
                                 <span className="text-sm font-bold">{user.name}</span>
