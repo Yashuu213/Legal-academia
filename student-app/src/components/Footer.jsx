@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Scale, Twitter, Linkedin, Instagram, Mail } from 'lucide-react';
+import { Scale, Instagram, Mail, Youtube } from 'lucide-react';
 
 const Footer = () => {
     return (
@@ -43,16 +43,13 @@ const Footer = () => {
                     <div>
                         <h3 className="text-white font-bold mb-4 border-b border-[#C5A059]/30 inline-block pb-1">Connect</h3>
                         <div className="flex space-x-4">
-                            <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
-                                <Twitter size={18} />
-                            </a>
-                            <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
-                                <Linkedin size={18} />
-                            </a>
-                            <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
+                            <a href="https://instagram.com/legal_academia" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
                                 <Instagram size={18} />
                             </a>
-                            <a href="mailto:support@legalacademia.com" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
+                            <a href="https://www.youtube.com/@LegalAcademiaa" target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
+                                <Youtube size={18} />
+                            </a>
+                            <a href="mailto:legalacademiaa@gmail.com" className="bg-gray-800 p-2 rounded-full hover:bg-[#C5A059] hover:text-black transition">
                                 <Mail size={18} />
                             </a>
                         </div>
