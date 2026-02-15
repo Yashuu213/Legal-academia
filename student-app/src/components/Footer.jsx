@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Scale, Instagram, Mail, Youtube } from 'lucide-react';
+import { Instagram, Mail, Youtube } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
     return (
@@ -9,7 +10,7 @@ const Footer = () => {
                     {/* Brand Section */}
                     <div className="space-y-4">
                         <div className="flex items-center space-x-2">
-                            <Scale className="text-[#C5A059]" size={28} />
+                            <img src={logo} alt="Logo" className="w-7 h-7" />
                             <span className="text-2xl font-bold font-playfair text-white">Legal <span className="text-[#C5A059]">Academia</span></span>
                         </div>
                         <p className="text-sm text-gray-400">

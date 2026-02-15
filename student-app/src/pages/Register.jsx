@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { Scale } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -23,7 +23,7 @@ const Register = () => {
         <div className="flex items-center justify-center h-screen bg-[#0f172a] text-white">
             <div className="w-full max-w-md p-8 space-y-6 bg-[#1e293b] rounded-xl border border-[#C5A059] shadow-2xl">
                 <div className="flex flex-col items-center">
-                    <Scale className="w-12 h-12 text-[#C5A059] mb-2" />
+                    <img src={logo} alt="Logo" className="w-12 h-12 mb-2" />
                     <h2 className="text-3xl font-playfair font-bold text-[#C5A059]">Join the Elite</h2>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">

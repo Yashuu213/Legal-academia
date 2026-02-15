@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { Scale, LogOut, User, Bell, Menu, X } from 'lucide-react';
 import api from '../utils/api';
+import logo from '../assets/logo.png';
 
 const WhatsAppButton = () => {
     const [link, setLink] = useState('');
@@ -62,7 +63,8 @@ const Navbar = () => {
         <nav className="fixed w-full z-50 bg-[#0f172a]/90 backdrop-blur border-b border-[#C5A059]/30">
             <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                 <Link to="/" className="flex items-center space-x-2">
-                    <Scale className="text-[#C5A059]" />
+                    {/* <Scale className="text-[#C5A059]" /> */}
+                    <img src={logo} alt="Logo" className="w-10 h-10 object-contain" />
                     <span className="text-xl font-bold font-playfair text-white">Legal <span className="text-[#C5A059]">Academia</span></span>
                 </Link>
 
